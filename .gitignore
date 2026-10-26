@@ -1,0 +1,7 @@
+.DS_Store
+backup-before-*/
+reference/
+
+# 制作途中の未使用画像
+images/gyusuji.jpg
+images/*.svg

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>ひなた食堂｜昔ながらの町の食堂（サンプルサイト）</title>
+  <meta name="description"
+    content="ひなた食堂（架空の店のサンプルサイト）。昼は天ぷらそば、夜は一杯。地域に寄り添う、昔ながらの食堂です。営業時間・お品書き・アクセスのご案内。" />
+
+  <!-- Google Fonts：見出し Zen Old Mincho / 本文 Zen Kaku Gothic New -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- JSが有効なときだけフェードインの初期状態を適用する（JS無効でも本文が見えるようにするため） -->
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
+</head>
+
+<body>
+
+  <!-- ============================================
+       Header：左に店名／右にハンバーガーメニュー
+       ============================================ -->
+  <header class="header">
+    <div class="header__inner">
+      <p class="header__logo"><a href="#top">ひなた食堂</a></p>
+
+      <!-- ハンバーガーボタン（3本線／768px以上では非表示） -->
+      <button type="button" class="nav-toggle" id="js-nav-toggle" aria-controls="js-nav" aria-expanded="false">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__label">メニュー</span>
+      </button>
+
+      <!-- ナビゲーション（スマホでは開閉／768px以上では横並びで常時表示） -->
+      <nav class="nav" id="js-nav" aria-label="メインメニュー">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#osusume">おすすめ</a></li>
+          <li class="nav__item"><a class="nav__link" href="#menu">お品書き</a></li>
+          <li class="nav__item"><a class="nav__link" href="#about">ひなた食堂について</a></li>
+          <li class="nav__item"><a class="nav__link" href="#info">店舗情報</a></li>
+          <li class="nav__item"><a class="nav__link" href="#access">アクセス</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============================================
+         Hero：写真は使わない。文字・余白・朱色の細線のみ
+         ============================================ -->
+    <section class="hero">
+      <div class="hero__inner">
+        <h1 class="hero__title">ひなた食堂</h1>
+
+        <span class="hero__rule" aria-hidden="true"></span>
+
+        <p class="hero__copy">町の角で、<br />お蕎麦。</p>
+
+        <p class="hero__lead">
+          お散歩の帰りに、<br />
+          ゆっくりお食事をどうぞ。
+        </p>
+
+        <a class="hero__scroll" href="#hours">
+          <span class="hero__scroll-text">SCROLL</span>
+          <!-- 下向き矢印 -->
+          <svg class="icon icon--arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4v15" />
+            <path d="M6 14l6 6 6-6" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         営業情報
+         ============================================ -->
+    <section class="hours" id="hours">
+      <div class="container fade-in">
+        <h2 class="section-title">
+          <span class="section-title__mark" aria-hidden="true"></span>
+          営業情報
+        </h2>
+
+        <dl class="hours__list">
+          <div class="hours__row">
+            <dt class="hours__label">
+              <!-- 時計アイコン -->
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3.5 2" />
+              </svg>
+              営業時間
+            </dt>
+            <dd class="hours__data">
+              <span class="hours__time">火〜土　11:00 - 14:30（L.O. 14:00）／17:30 - 21:00（L.O. 20:30）</span>
+              <span class="hours__time">日　11:00 - 14:30（L.O. 14:00）</span>
+            </dd>
+          </div>
+
+          <div class="hours__row">
+            <dt class="hours__label">定休日</dt>
+            <dd class="hours__data">月曜日</dd>
+          </div>
+
+          <div class="hours__row">
+            <dt class="hours__label">住所</dt>
+            <dd class="hours__data">滋賀県○○市△△町1-2-3（サンプル）</dd>
+          </div>
+        </dl>
+
+        <p class="hours__note">※ 営業時間は変更になる場合があります。最新情報は公式Instagramをご確認ください。</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         おすすめ：ここで初めて写真を使う（4:3）
+         ============================================ -->
+    <section class="osusume" id="osusume">
+      <div class="container">
+        <h2 class="section-title fade-in">
+          <span class="section-title__mark" aria-hidden="true"></span>
+          おすすめ
+        </h2>
+
+        <div class="osusume__list">
+          <!-- ▼▼ 差し替え箇所：料理写真（4:3 推奨 / 例 1200×900）▼▼ -->
+          <article class="dish">
+            <figure class="dish__figure">
+              <img class="dish__img" src="images/soba.jpg" alt="海老天ぷらとねぎを添えた温かい蕎麦のイメージ" width="1536" height="1024"
+                loading="eager" />
+            </figure>
+            <div class="dish__body">
+              <h3 class="dish__name">天ぷらそば</h3>
+              <p class="dish__text">
+                香ばしい揚げたての天ぷらと、<br />
+                のどごしのよい蕎麦。
+              </p>
+              <p class="dish__price">¥1,100</p>
+            </div>
+          </article>
+
+          <article class="dish">
+            <figure class="dish__figure">
+              <img class="dish__img" src="images/gyusu-oroshi-ponzu.jpg" alt="大根おろしとねぎを添えた牛すじおろしポン酢のイメージ" width="1456" height="1088"
+                loading="eager" />
+            </figure>
+            <div class="dish__body">
+              <h3 class="dish__name">牛すじおろしポン酢</h3>
+              <p class="dish__text">
+                牛すじに大根おろしを添えた、<br />
+                さっぱりと味わえる一品。
+              </p>
+              <p class="dish__price">¥650</p>
+            </div>
+          </article>
+          <!-- ▲▲ 差し替え箇所ここまで ▲▲ -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         お品書き：メニューを4分類で表示（サンプル）
+         ============================================ -->
+    <section class="menu" id="menu">
+      <div class="container">
+        <h2 class="section-title fade-in">
+          <span class="section-title__mark" aria-hidden="true"></span>
+          お品書き
+        </h2>
+
+        <div class="menu__tabs fade-in" role="tablist" aria-label="お品書きの分類">
+          <button class="menu__tab" id="tab-rice" type="button" role="tab" aria-selected="true"
+            aria-controls="panel-rice">
+            <svg class="menu__tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16l-2 9H6L4 9Zm2-3h12M8 3v3m8-3v3" /></svg>
+            <span>丼・定食</span>
+          </button>
+          <button class="menu__tab" id="tab-noodles" type="button" role="tab" aria-selected="false"
+            aria-controls="panel-noodles" tabindex="-1">
+            <svg class="menu__tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18c0 6-3.5 9-9 9s-9-3-9-9Zm3-3c1-2 3 0 4-2s3 0 4-2m-7 17h10" /></svg>
+            <span>麺類</span>
+          </button>
+          <button class="menu__tab" id="tab-set" type="button" role="tab" aria-selected="false"
+            aria-controls="panel-set" tabindex="-1">
+            <svg class="menu__tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18l-2 8H5l-2-8Zm4-3h10M9 5h6" /></svg>
+            <span>セット</span>
+          </button>
+          <button class="menu__tab" id="tab-side" type="button" role="tab" aria-selected="false"
+            aria-controls="panel-side" tabindex="-1">
+            <svg class="menu__tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14v11H5V8Zm3 0V5h8v3M5 13h14" /></svg>
+            <span>一品</span>
+          </button>
+        </div>
+
+        <div class="menu__panels fade-in">
+          <div class="menu__panel" id="panel-rice" role="tabpanel" aria-labelledby="tab-rice" tabindex="0">
+            <h3 class="menu__group-title">どんぶり・定食</h3>
+            <ul class="menu__list">
+              <li class="menu__row"><span class="menu__name">玉子丼</span><span class="menu__price">¥700</span></li>
+              <li class="menu__row"><span class="menu__name">親子丼</span><span class="menu__price">¥850</span></li>
+              <li class="menu__row"><span class="menu__name">カツ丼</span><span class="menu__price">¥950</span></li>
+              <li class="menu__row"><span class="menu__name">天丼</span><span class="menu__price">¥1,000</span></li>
+              <li class="menu__row"><span class="menu__name">唐揚げ定食</span><span class="menu__price">¥900</span></li>
+              <li class="menu__row"><span class="menu__name">焼き魚定食</span><span class="menu__price">¥1,000</span></li>
+            </ul>
+          </div>
+
+          <div class="menu__panel" id="panel-noodles" role="tabpanel" aria-labelledby="tab-noodles" tabindex="0">
+            <h3 class="menu__group-title">そば・中華そば</h3>
+            <ul class="menu__list">
+              <li class="menu__row"><span class="menu__name">ざるそば</span><span class="menu__price">¥600</span></li>
+              <li class="menu__row"><span class="menu__name">かけそば</span><span class="menu__price">¥600</span></li>
+              <li class="menu__row"><span class="menu__name">きつねそば</span><span class="menu__price">¥700</span></li>
+              <li class="menu__row"><span class="menu__name">たぬきそば</span><span class="menu__price">¥700</span></li>
+              <li class="menu__row"><span class="menu__name">とろろそば</span><span class="menu__price">¥850</span></li>
+              <li class="menu__row"><span class="menu__name">鶏南蛮そば</span><span class="menu__price">¥900</span></li>
+              <li class="menu__row"><span class="menu__name">カレーそば</span><span class="menu__price">¥850</span></li>
+              <li class="menu__row"><span class="menu__name">天ぷらそば</span><span class="menu__price">¥1,100</span></li>
+              <li class="menu__row"><span class="menu__name">中華そば</span><span class="menu__price">¥700</span></li>
+            </ul>
+          </div>
+
+          <div class="menu__panel" id="panel-set" role="tabpanel" aria-labelledby="tab-set" tabindex="0">
+            <h3 class="menu__group-title">セットメニュー</h3>
+            <ul class="menu__list">
+              <li class="menu__row"><span class="menu__name">ざるそばセット</span><span class="menu__price">¥900</span></li>
+              <li class="menu__row"><span class="menu__name">きつねそばセット</span><span class="menu__price">¥1,000</span></li>
+              <li class="menu__row"><span class="menu__name">鶏南蛮そばセット</span><span class="menu__price">¥1,200</span></li>
+              <li class="menu__row"><span class="menu__name">カレーそばセット</span><span class="menu__price">¥1,150</span></li>
+              <li class="menu__row"><span class="menu__name">天ぷらそばセット</span><span class="menu__price">¥1,400</span></li>
+              <li class="menu__row"><span class="menu__name">中華そばセット</span><span class="menu__price">¥1,000</span></li>
+            </ul>
+          </div>
+
+          <div class="menu__panel" id="panel-side" role="tabpanel" aria-labelledby="tab-side" tabindex="0">
+            <h3 class="menu__group-title">一品・おつまみ</h3>
+            <ul class="menu__list">
+              <li class="menu__row"><span class="menu__name">えだまめ</span><span class="menu__price">¥350</span></li>
+              <li class="menu__row"><span class="menu__name">板わさ</span><span class="menu__price">¥400</span></li>
+              <li class="menu__row"><span class="menu__name">天ぷら盛合せ</span><span class="menu__price">¥900</span></li>
+              <li class="menu__row"><span class="menu__name">だし巻き玉子</span><span class="menu__price">¥450</span></li>
+              <li class="menu__row"><span class="menu__name">鶏の唐揚げ</span><span class="menu__price">¥500</span></li>
+              <li class="menu__row"><span class="menu__name">牛すじおろしポン酢</span><span class="menu__price">¥650</span></li>
+              <li class="menu__row"><span class="menu__name">冷奴</span><span class="menu__price">¥300</span></li>
+              <li class="menu__row"><span class="menu__name">漬物盛合せ</span><span class="menu__price">¥300</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="menu__note">※ 価格は税込のサンプルです。実際の店舗のメニューに合わせて差し替えます。</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         ひなた食堂について：店内写真1枚（3:2）＋短い紹介文
+         ============================================ -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section-title fade-in">
+          <span class="section-title__mark" aria-hidden="true"></span>
+          ひなた食堂について
+        </h2>
+
+        <div class="about__body">
+          <!-- ▼▼ 差し替え箇所：店内写真（3:2 推奨 / 例 1200×800）▼▼ -->
+          <figure class="about__figure">
+            <img class="about__img" src="images/interior.jpg" alt="木のテーブルとカウンターが並ぶ食堂の店内イメージ" width="1536" height="1024"
+              loading="eager" />
+          </figure>
+          <!-- ▲▲ 差し替え箇所ここまで ▲▲ -->
+
+          <div class="about__text">
+            <p>
+              町の片隅で、静かに暖簾をあげています。<br />
+              昼はごはんを、夜は一杯を。<br />
+              肩の力を抜いて過ごせる場所であるように、<br />
+              日々の一品を用意しています。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         店舗情報・アクセス（同一セクション内にまとめる）
+         ▼▼ 差し替え箇所：店舗情報すべて＋地図＋店構え写真 ▼▼
+         ============================================ -->
+    <section class="access" id="access">
+      <div class="container">
+        <h2 class="section-title fade-in">
+          <span class="section-title__mark" aria-hidden="true"></span>
+          店舗情報・アクセス
+        </h2>
+
+        <div class="access__body">
+          <!-- 店舗情報 -->
+          <dl class="info fade-in" id="info">
+            <div class="info__row">
+              <dt class="info__label">営業時間</dt>
+              <dd class="info__data">火〜土 11:00 - 14:30（L.O. 14:00）／17:30 - 21:00（L.O. 20:30）<br />日 11:00 - 14:30（L.O. 14:00）</dd>
+            </div>
+            <div class="info__row">
+              <dt class="info__label">定休日</dt>
+              <dd class="info__data">月曜日</dd>
+            </div>
+            <div class="info__row">
+              <dt class="info__label">住所</dt>
+              <dd class="info__data">滋賀県○○市△△町1-2-3（サンプル）</dd>
+            </div>
+            <div class="info__row">
+              <dt class="info__label">電話番号</dt>
+              <dd class="info__data">077-000-0000（サンプル）</dd>
+            </div>
+            <div class="info__row">
+              <dt class="info__label">駐車場</dt>
+              <dd class="info__data">あり（3台）</dd>
+            </div>
+          </dl>
+
+          <!-- 店構え写真 -->
+          <!-- ▼▼ 差し替え箇所：店構え写真（3:2 推奨 / 例 1200×800）▼▼ -->
+          <figure class="access__figure">
+            <img class="access__img" src="images/storefront.jpg" alt="紺色の暖簾が掛かった食堂の店構えイメージ" width="1536" height="1024"
+              loading="eager" />
+          </figure>
+          <!-- ▲▲ 差し替え箇所ここまで ▲▲ -->
+        </div>
+
+        <!-- ひなた食堂のGoogleマップ -->
+        <div class="map fade-in">
+          <iframe class="map__frame" title="ひなた食堂の地図"
+            src="https://www.google.com/maps?q=%E6%BB%8B%E8%B3%80%E7%9C%8C&amp;output=embed"
+            width="600" height="450" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%BB%8B%E8%B3%80%E7%9C%8C"
+            target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            Googleマップで見る
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CTA：電話をメイン導線に
+         ============================================ -->
+    <section class="cta">
+      <div class="container fade-in">
+        <h2 class="cta__title"><span>ご来店を</span><span>お待ちしています。</span></h2>
+        <p class="cta__lead">ご予約・お問い合わせはお電話でどうぞ。</p>
+
+        <div class="cta__buttons">
+          <a class="btn btn--primary" href="#">
+            <!-- 電話アイコン -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.7 1.5C12.2 18.6 5.4 11.8 5 5.2A1.5 1.5 0 0 1 6.5 3.5z" />
+            </svg>
+            電話で問い合わせる
+          </a>
+
+          <a class="btn btn--outline"
+            href="https://www.google.com/maps/search/?api=1&amp;query=%E6%BB%8B%E8%B3%80%E7%9C%8C"
+            target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            地図を見る
+          </a>
+        </div>
+
+        <!-- SNS：小さめに表示 -->
+        <ul class="sns">
+          <li class="sns__item">
+            <a class="sns__link" href="#" target="_blank" rel="noopener"
+              aria-label="ひなた食堂の公式Instagram">
+              <svg class="icon icon--sns" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17" cy="7" r="0.9" fill="currentColor" stroke="none" />
+              </svg>
+              Instagram
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       Footer
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__logo">ひなた食堂</p>
+      <p class="footer__address">滋賀県○○市△△町1-2-3（サンプル）</p>
+      <p class="footer__notice">※ 本サイトは、飲食店向けに制作したサンプルサイトです。店名・住所・電話番号・メニューはすべて架空のものです。</p>
+    </div>
+  </footer>
+
+  <!-- トップへ戻るボタン（スクロール後に表示） -->
+  <button type="button" class="to-top" id="js-to-top" aria-label="ページ上部へ戻る">
+    <svg class="icon icon--arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 20V5" />
+      <path d="M6 10l6-6 6 6" />
+    </svg>
+  </button>
+
+  <script src="script.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,1101 @@
+@charset "UTF-8";
+
+/* ==========================================================
+   ひなた食堂 デモサイト
+   モバイルファースト（〜767px スマホ / 768〜1023px タブレット / 1024px〜 PC）
+   ・レスポンシブの上書きはファイル末尾にまとめています
+   ========================================================== */
+
+
+/* ==========================================================
+   1. 変数
+   ========================================================== */
+:root {
+  /* 配色 */
+  --color-bg: #F1E9D8;
+  /* 背景：生成り */
+  --color-text: #2B2926;
+  /* 本文・見出し：墨色 */
+  --color-accent: #B7410E;
+  /* アクセント：朱色（ボタンと価格のみ） */
+  --color-border: #C9BBA0;
+  /* 罫線：薄茶 */
+  --color-bg-sub: #EAE0CB;
+  /* 画像・地図プレースホルダー用のわずかに濃い生成り */
+
+  /* フォント */
+  --font-mincho: "Zen Old Mincho", serif;
+  --font-gothic: "Zen Kaku Gothic New", sans-serif;
+
+  /* 余白（スマホ基準。タブレット・PCで上書き） */
+  --space-section: 72px;
+  /* セクション間 */
+  --space-inline: 22px;
+  /* 左右余白 */
+
+  /* 最大幅 */
+  --max-width: 900px;
+  /* 通常コンテンツ */
+  --max-width-wide: 1100px;
+  /* Heroなど広めのセクション */
+}
+
+
+/* ==========================================================
+   2. リセット（簡易版）
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dt,
+dd,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* ==========================================================
+   3. ベース／タイポグラフィ
+   ========================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================
+   4. 共通パーツ
+   ========================================================== */
+
+/* --- コンテナ --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-inline);
+}
+
+/* --- セクション共通の上下余白 --- */
+.hours,
+.osusume,
+.menu,
+.about,
+.access,
+.cta {
+  padding-block: var(--space-section);
+}
+
+/* --- セクション見出し（中央寄せ＋上に短い朱色の線） --- */
+.section-title {
+  font-size: 27px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title__mark {
+  display: block;
+  width: 32px;
+  height: 1px;
+  margin: 0 auto 20px;
+  background-color: var(--color-accent);
+}
+
+/* --- アイコン（細線・モノクロ・主張させない） --- */
+.icon {
+  width: 1.05em;
+  height: 1.05em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* --- ボタン --- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 24px;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  transition: opacity 0.3s, background-color 0.3s, color 0.3s;
+}
+
+/* メインボタン：朱色背景＋白文字 */
+.btn--primary {
+  color: #fff;
+  background-color: var(--color-accent);
+}
+
+/* サブボタン：透明背景＋墨色の枠線 */
+.btn--outline {
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid var(--color-text);
+}
+
+/* --- フェードイン（JS有効時のみ初期状態を適用） --- */
+.js .fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.js .fade-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ==========================================================
+   5. Header／ナビゲーション
+   ========================================================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  /* ヘッダー下の細い罫線 */
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin-inline: auto;
+  padding: 16px var(--space-inline);
+}
+
+.header__logo {
+  font-family: var(--font-mincho);
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+/* --- ハンバーガーボタン（3本線） --- */
+.nav-toggle {
+  position: relative;
+  width: 28px;
+  height: 18px;
+  padding: 0;
+}
+
+.nav-toggle__bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text);
+  transition: transform 0.3s ease, opacity 0.3s ease, top 0.3s ease;
+}
+
+.nav-toggle__bar:nth-of-type(1) {
+  top: 0;
+}
+
+.nav-toggle__bar:nth-of-type(2) {
+  top: 8px;
+}
+
+.nav-toggle__bar:nth-of-type(3) {
+  top: 16px;
+}
+
+/* 開いているときは×印に */
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-of-type(1) {
+  top: 8px;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-of-type(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-of-type(3) {
+  top: 8px;
+  transform: rotate(-45deg);
+}
+
+/* スクリーンリーダー用のラベル */
+.nav-toggle__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/* --- ナビ本体（スマホ：ヘッダー下に開く） --- */
+.nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.nav__list {
+  max-width: var(--max-width-wide);
+  margin-inline: auto;
+  padding-inline: var(--space-inline);
+}
+
+.nav__item+.nav__item {
+  border-top: 1px solid var(--color-border);
+}
+
+.nav__link {
+  display: block;
+  padding: 16px 2px;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+
+
+/* ==========================================================
+   6. Hero（写真なし／文字・余白・朱色の細線のみ）
+   ========================================================== */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* ヘッダー分を差し引いて、ほぼ1画面に収める */
+  min-height: calc(100vh - 51px);
+  min-height: calc(100svh - 51px);
+  padding: 64px var(--space-inline) 48px;
+}
+
+.hero__inner {
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  /* letter-spacing の分の右余白を打ち消して中央に見せる */
+  text-indent: 0.22em;
+}
+
+.hero__rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin: 28px auto;
+  background-color: var(--color-accent);
+}
+
+.hero__copy {
+  font-family: var(--font-mincho);
+  font-size: 19px;
+  line-height: 2;
+  letter-spacing: 0.14em;
+}
+
+.hero__lead {
+  margin-top: 28px;
+  font-size: 15px;
+  line-height: 2.1;
+  letter-spacing: 0.04em;
+}
+
+/* --- SCROLL --- */
+.hero__scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 56px;
+  color: var(--color-text);
+}
+
+.hero__scroll-text {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+}
+
+.icon--arrow {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.2;
+}
+
+
+/* ==========================================================
+   7. 営業情報
+   ========================================================== */
+.hours {
+  border-top: 1px solid var(--color-border);
+}
+
+.hours__list {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.hours__row {
+  padding-block: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hours__row:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.hours__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mincho);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+}
+
+.hours__data {
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* 営業時間は2行を並べる */
+.hours__time {
+  display: block;
+}
+
+.hours__note {
+  margin-top: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--color-text);
+  opacity: 0.65;
+}
+
+
+/* ==========================================================
+   8. おすすめ（写真 4:3／カード風に囲わない）
+   ========================================================== */
+.osusume__list {
+  display: grid;
+  gap: 56px;
+}
+
+.dish__figure {
+  background-color: var(--color-bg-sub);
+}
+
+.dish__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.dish__body {
+  margin-top: 20px;
+}
+
+.dish__name {
+  font-size: 21px;
+  letter-spacing: 0.1em;
+}
+
+.dish__text {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 2;
+}
+
+/* 価格のみ朱色 */
+.dish__price {
+  margin-top: 14px;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+
+/* ==========================================================
+   9. お品書き（分類タブ／文字・価格・罫線のみ）
+   ========================================================== */
+.menu {
+  border-top: 1px solid var(--color-border);
+}
+
+.menu__tabs,
+.menu__panels {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.menu__tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.menu__tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 76px;
+  padding: 12px 8px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: var(--color-text);
+  background-color: var(--color-bg-sub);
+  font-family: var(--font-mincho);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.menu__tab[aria-selected="true"] {
+  color: #fff;
+  background-color: var(--color-accent);
+}
+
+.menu__tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 0;
+  height: 0;
+  border-top: 9px solid var(--color-accent);
+  border-right: 9px solid transparent;
+  border-left: 9px solid transparent;
+  transform: translateX(-50%);
+}
+
+.menu__tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.menu__tab-icon {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: 0 0 auto;
+}
+
+.menu__panel[hidden] {
+  display: none;
+}
+
+.menu__panel:focus {
+  outline: none;
+}
+
+.menu__panel:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 8px;
+}
+
+.menu__group-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  letter-spacing: 0.16em;
+  margin-bottom: 8px;
+}
+
+/* 小見出しの右に伸びる細い罫線 */
+.menu__group-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.menu__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu__name {
+  font-size: 16px;
+  letter-spacing: 0.04em;
+}
+
+/* 価格のみ朱色 */
+.menu__price {
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--color-accent);
+}
+
+.menu__note {
+  margin-top: 28px;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.65;
+}
+
+
+/* ==========================================================
+   10. ひなた食堂について（店内写真 3:2 ＋短い紹介文）
+   ========================================================== */
+.about {
+  border-top: 1px solid var(--color-border);
+}
+
+.about__figure {
+  background-color: var(--color-bg-sub);
+}
+
+.about__img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.about__text {
+  margin-top: 24px;
+  font-size: 15px;
+  line-height: 2.1;
+}
+
+
+/* ==========================================================
+   11. 店舗情報・アクセス（同一セクション内にまとめる）
+   ========================================================== */
+.access {
+  border-top: 1px solid var(--color-border);
+}
+
+.info__row {
+  padding-block: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.info__row:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.info__label {
+  font-family: var(--font-mincho);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.info__data {
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.info__data a {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* --- 店構え写真 --- */
+.access__figure {
+  margin-top: 40px;
+  background-color: var(--color-bg-sub);
+}
+
+.access__img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* --- 地図エリア --- */
+.map {
+  margin-top: 40px;
+}
+
+.map__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-bg-sub);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+
+.map__text {
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.map__text small {
+  font-size: 12px;
+}
+
+.icon--pin {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.2;
+  opacity: 0.6;
+}
+
+/* 差し替え後の iframe 用 */
+.map__frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+
+.map .btn {
+  margin-top: 20px;
+}
+
+
+/* ==========================================================
+   12. CTA（電話をメイン導線に）
+   ========================================================== */
+.cta {
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.cta__title {
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+/* 「ご来店を／お待ちしています。」の単位で改行させる */
+.cta__title span {
+  display: inline-block;
+}
+
+.cta__lead {
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+.cta__buttons {
+  display: grid;
+  gap: 14px;
+  max-width: 400px;
+  margin: 36px auto 0;
+}
+
+/* --- SNS（小さめに） --- */
+.sns {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.sns__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+.icon--sns {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.3;
+}
+
+/* ==========================================================
+   13. Footer／トップへ戻る
+   ========================================================== */
+.footer {
+  padding-block: 48px;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__logo {
+  font-family: var(--font-mincho);
+  font-size: 19px;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+}
+
+.footer__address {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.9;
+  opacity: 0.7;
+}
+
+.footer__notice {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.8;
+  opacity: 0.7;
+}
+
+/* --- トップへ戻るボタン --- */
+.to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ==========================================================
+   14. タブレット（768px 〜 1023px）
+   ========================================================== */
+@media screen and (min-width: 768px) {
+
+  :root {
+    --space-section: 96px;
+    --space-inline: 40px;
+  }
+
+  /* --- Header：ハンバーガーを隠して横並びナビに --- */
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    width: auto;
+    background: none;
+    border: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav__list {
+    display: flex;
+    gap: 26px;
+    padding-inline: 0;
+  }
+
+  .nav__item+.nav__item {
+    border-top: none;
+  }
+
+  .nav__link {
+    padding: 4px 0;
+    font-size: 14px;
+  }
+
+  /* --- 見出し --- */
+  .section-title {
+    font-size: 32px;
+    margin-bottom: 48px;
+  }
+
+  /* --- Hero --- */
+  .hero {
+    min-height: calc(100vh - 55px);
+    min-height: calc(100svh - 55px);
+  }
+
+  .hero__title {
+    font-size: 48px;
+  }
+
+  .hero__copy {
+    font-size: 22px;
+  }
+
+  .hero__lead {
+    margin-top: 32px;
+    font-size: 16px;
+  }
+
+  /* --- おすすめ：2列 --- */
+  .osusume__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+
+  /* --- お品書き：4分類を横一列に --- */
+  .menu__tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .menu__tab {
+    min-height: 84px;
+    font-size: 16px;
+  }
+
+  /* --- ひなた食堂について：写真＋文章の2列 --- */
+  .about__body {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .about__text {
+    margin-top: 0;
+  }
+
+  /* --- ボタンは内容幅に --- */
+  .btn {
+    width: auto;
+    min-width: 260px;
+  }
+
+  .cta__buttons {
+    display: flex;
+    justify-content: center;
+    max-width: none;
+    gap: 20px;
+  }
+
+  .map .btn {
+    margin-inline: auto;
+  }
+
+  .to-top {
+    right: 24px;
+    bottom: 24px;
+  }
+}
+
+
+/* ==========================================================
+   15. PC（1024px 〜）
+   ========================================================== */
+@media screen and (min-width: 1024px) {
+
+  :root {
+    --space-section: 120px;
+    --space-inline: 48px;
+  }
+
+  /* --- 見出し --- */
+  .section-title {
+    font-size: 36px;
+    margin-bottom: 56px;
+  }
+
+  /* --- Hero：PCでも写真は入れず中央寄せ --- */
+  .hero__title {
+    font-size: 56px;
+  }
+
+  .hero__copy {
+    font-size: 24px;
+  }
+
+  .hero__rule {
+    margin-block: 32px;
+  }
+
+  /* --- おすすめ：写真と文章を横並びに（2品を上下に配置） --- */
+  .osusume__list {
+    grid-template-columns: 1fr;
+    gap: 72px;
+  }
+
+  .dish {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 48px;
+  }
+
+  /* 2品目は写真と文章を左右入れ替えて単調さを避ける */
+  .dish:nth-child(even) .dish__figure {
+    order: 2;
+  }
+
+  .dish__body {
+    margin-top: 0;
+  }
+
+  .dish__name {
+    font-size: 24px;
+  }
+
+  .dish__text {
+    font-size: 16px;
+  }
+
+  .dish__price {
+    font-size: 18px;
+  }
+
+  /* --- 店舗情報・アクセス：情報＋店構え写真を横並び --- */
+  .access__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 48px;
+  }
+
+  .access__figure {
+    margin-top: 0;
+  }
+
+  .map {
+    margin-top: 56px;
+    text-align: center;
+  }
+
+  .map__placeholder,
+  .map__frame {
+    aspect-ratio: 16 / 7;
+  }
+
+  /* --- CTA --- */
+  .cta__title {
+    font-size: 30px;
+  }
+
+  /* --- ホバー（PCのみ） --- */
+  .btn--primary:hover {
+    opacity: 0.85;
+  }
+
+  .btn--outline:hover {
+    color: #fff;
+    background-color: var(--color-text);
+  }
+
+  .nav__link:hover,
+  .sns__link:hover {
+    opacity: 0.6;
+  }
+}
+
+
+/* ==========================================================
+   16. アニメーションを控える設定の端末への配慮
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
